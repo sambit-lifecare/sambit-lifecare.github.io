@@ -495,7 +495,7 @@ img,video{max-width:100%}
 <div class="sambit-tool-content"><p class="eyebrow">공식 화장예약 안내</p><h2>e하늘 시스템 화장예약</h2><p>보건복지부 e하늘 장사정보시스템에서 화장 예약 및 예약 가능 일정을 확인하실 수 있습니다. 예약은 공식 사이트에서 직접 진행되며, 시설·일정에 따라 이용조건이 다를 수 있습니다.</p><a class="cta gold" href="https://www.15774129.go.kr/" target="_blank" rel="noopener noreferrer">e하늘 공식 화장예약 시스템 열기 ↗</a><p class="tool-muted">예약에 어려움이 있으시면 삼빛라이프케어에 문의해 주세요. <a href="tel:01057349121">☎ 상담 연결</a></p></div>
 </section>
 <section class="section sambit-tool-panel" id="cost-estimator" role="tabpanel" aria-labelledby="facility-tab-estimate" data-facility-panel="estimate" hidden>
-<div class="sambit-tool-content"><p class="eyebrow">원스톱 예상비용</p><h2>우리 가족의 장례비용을<br>순서대로 확인하세요.</h2><p class="tool-muted">삼빛라이프케어 150만·250만·340만 원 상품과 장례식장·화장·장지·추가서비스를 한 번에 계산합니다. <strong>상품 가격 외 금액은 실제 요금이 아닌 수정 가능한 예시 예산</strong>입니다.</p>
+<div class="sambit-tool-content"><p class="eyebrow">원스톱 예상비용</p><h2>우리 가족의 장례비용을<br>순서대로 확인하세요.</h2><p class="tool-muted">각 단계를 선택할 때마다 예상비용이 즉시 합산됩니다. <strong>150만·250만·340만 원 상품 외 시설·화장·장지 금액은 실제 요금이 아닌 수정 가능한 계산용 예시 예산</strong>입니다.</p>
 <div class="cost-progress" id="cost-progress" aria-label="진행 단계"></div>
 <div class="cost-layout"><div class="cost-main"><div class="cost-step" id="cost-step" aria-live="polite"></div><div class="cost-actions"><button type="button" id="cost-back">← 이전 단계</button><button type="button" id="cost-next" class="cta">다음 단계 →</button></div></div><aside class="cost-summary"><strong>현재까지 선택한 항목</strong><p id="cost-stage">1 / 7 단계</p><div id="cost-selections"></div><p class="cost-total-label">현재까지 예상비용 (상품 가격 + 예시 예산)</p><strong class="cost-total" id="cost-total">0원</strong><p class="tool-muted" id="cost-total-note">시설비 등은 가족이 수정할 수 있는 가정 예산입니다. 실제 청구액이 아닙니다.</p></aside></div>
 <div class="cost-explainer"><h3>한 번에 준비하는 장례, 이렇게 진행됩니다.</h3><p>장례형태 › 장례식장 › 장례서비스 › 화장 › 장지 › 추가서비스 › 결과확인</p><h3>삼빛라이프케어의 투명한 비용 안내</h3><p>장례서비스 상품의 표시가격(150만·250만·340만 원)과 그 밖의 항목별 <strong>예시 예산</strong>을 합산합니다. 예시 예산은 실제 시설의 요금이나 삼빛라이프케어의 확정 견적이 아닙니다. 상품에 포함된 품목은 중복 선택하지 않도록 상담 시 확인하세요. 관내·관외, 시설 이용시간, 음식 인원, 선택 품목에 따라 달라지므로 계약 전 반드시 서면 견적을 확인하세요.</p></div></div>
@@ -653,52 +653,33 @@ function handleHash(){const found=order.find(k=>location.hash==='#'+panels[k].id
 })();</script><script id="sambit-cost-wizard">(()=>{
 'use strict';
 const names=['장례형태','장례식장','장례서비스','화장','장지','추가서비스','결과확인'];
-// Service plan prices are user-provided. All other defaults are editable illustrative budgets, NOT verified rates.
+// 상품 가격만 실제 안내된 금액입니다. 나머지는 공개요금이 아닌 편집 가능한 계산용 가정값입니다.
 const groups=[
- [{name:'무빈소',amount:0,note:'빈소·조문객 음식 예산 제외 (안치·입관 관련 시설비는 별도)'},{name:'1일장 (24시간)',amount:400000,note:'시설·음식 예시 예산'},{name:'2일장 (48시간)',amount:800000,note:'시설·음식 예시 예산'},{name:'3일장 (72시간)',amount:1200000,note:'시설·음식 예시 예산'}],
- [{name:'장례식장 이용 (시설 기본 예산)',amount:600000,note:'시설별 이용료 확인 필요'},{name:'시설비 미정',amount:0,note:'확인 전에는 0원 예산으로 임시 계산'},{name:'장례식장 이용 안 함',amount:0,note:'별도 시설 이용 없는 경우'}],
- [{name:'삼빛라이프케어 150 상품',amount:1500000,official:true},{name:'삼빛라이프케어 250 상품',amount:2500000,official:true},{name:'삼빛라이프케어 340 상품',amount:3400000,official:true}],
- [{name:'화장 진행 (예산)',amount:150000,note:'관내·관외에 따라 달라짐'},{name:'화장 비용 미정',amount:0,note:'실제 요금 확인 필요'},{name:'화장 선택 안 함',amount:0,note:'해당 없는 경우'}],
- [{name:'봉안시설 (예산)',amount:1000000,note:'시설별 분양·사용료 확인 필요'},{name:'자연장지·수목장 (예산)',amount:1500000,note:'시설별 사용료 확인 필요'},{name:'묘지 (예산)',amount:2000000,note:'시설별 비용 확인 필요'},{name:'장지 미정',amount:0,note:'추후 확인'}],
- [{name:'추가서비스 없음',amount:0},{name:'추가서비스 예산',amount:200000,note:'선택 항목에 따라 변경 가능'}]
+ [{name:'무빈소',price:0},{name:'1일장 (24시간)',price:400000},{name:'2일장 (48시간)',price:800000},{name:'3일장 (72시간)',price:1200000}],
+ [{name:'장례식장 기본시설 이용',price:600000},{name:'장례식장 간소 이용',price:300000},{name:'장례식장 이용 안 함',price:0}],
+ [{name:'삼빛라이프케어 150 상품',price:1500000},{name:'삼빛라이프케어 250 상품',price:2500000},{name:'삼빛라이프케어 340 상품',price:3400000}],
+ [{name:'관내 화장 가정',price:100000},{name:'관외 화장 가정',price:800000},{name:'화장비 미포함',price:0}],
+ [{name:'봉안시설 예산',price:1000000},{name:'자연장지·수목장 예산',price:2000000},{name:'묘지 예산',price:3000000},{name:'장지비 미포함',price:0}],
+ [{name:'추가서비스 없음',price:0},{name:'추가서비스 예산 20만 원',price:200000},{name:'추가서비스 예산 50만 원',price:500000}]
 ];
-let step=0;
-const picks=[0,0,0,0,0,0],amounts=[0,600000,1500000,150000,1000000,0];
+let step=0;const picks=Array(6).fill(null),amounts=Array(6).fill(null);
 const el=id=>document.getElementById(id),progress=el('cost-progress'),area=el('cost-step'),stage=el('cost-stage'),back=el('cost-back'),next=el('cost-next'),selected=el('cost-selections'),total=el('cost-total');
+if(!progress||!area||!stage||!back||!next||!selected||!total)return;
 const fmt=n=>Math.round(n).toLocaleString('ko-KR')+'원';
-function amount(i){return Number(amounts[i])||0}
-function updateSummary(){
- selected.replaceChildren();let sum=0;
- for(let i=0;i<6;i++){
-  const item=groups[i][picks[i]],a=amount(i);sum+=a;
-  const line=document.createElement('p');line.className='cost-choice';
-  const bold=document.createElement('b');bold.textContent=names[i]+' · ';
-  line.append(bold,document.createTextNode(item.name+' — '+fmt(a)+(i===2?' (상품가격)':' (예시/입력 예산)')));selected.append(line);
- }
- total.textContent='약 '+fmt(sum);
- el('cost-total-note').textContent='장례서비스 상품가격 + 가족이 수정 가능한 예시 예산의 합계입니다. 실제 시설요금·계약금액이 아니며, 중복 항목 여부를 반드시 확인하세요.';
+function summary(){selected.replaceChildren();let sum=0,count=0,example=false;
+ for(let i=0;i<6;i++){if(picks[i]===null)continue;count++;const item=groups[i][picks[i]],a=amounts[i];sum+=a; if(i!==2)example=true;
+ const line=document.createElement('p');line.className='cost-choice';line.textContent=names[i]+' · '+item.name+' — '+fmt(a)+(i===2?' (상품 안내가격)':' (시뮬레이션 예산)');selected.append(line)}
+ total.textContent=count===0?'선택 전 · 0원':'약 '+fmt(sum);
+ el('cost-total-note').textContent=count===0?'각 단계에서 항목을 선택하면 금액이 합산됩니다.':example?'상품 가격 외 금액은 실제 시설 요금이 아닌 계산용 가정 예산입니다. 장례형태 예산과 시설비·음식비가 중복될 수 있으니 견적 시 조정하세요. 확정 견적이 아닙니다.':'현재 합계는 선택한 삼빛라이프케어 상품 안내가격입니다. 시설·화장·장지 비용은 별도입니다.';
 }
-function render(){
- progress.replaceChildren();names.forEach((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=(i+1)+'. '+n;b.setAttribute('aria-current',i===step?'step':'false');b.onclick=()=>{step=i;render()};progress.append(b)});
- stage.textContent=(step+1)+' / 7 단계';area.replaceChildren();
- const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent=(step+1)+' · '+names[step];area.append(eyebrow);
+function render(){progress.replaceChildren();names.forEach((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=(i+1)+'. '+n;b.setAttribute('aria-current',i===step?'step':'false');b.onclick=()=>{step=i;render()};progress.append(b)});
+ stage.textContent=(step+1)+' / 7 단계';area.replaceChildren();const eyebrow=document.createElement('p');eyebrow.className='eyebrow';eyebrow.textContent=(step+1)+' · '+names[step];area.append(eyebrow);
  const h=document.createElement('h3');h.textContent=step===0?'장례 형태를 선택해주세요.':step===6?'우리 가족의 장례 예상비용':'필요한 '+names[step]+' 항목을 선택해주세요.';area.append(h);
- if(step<6){
-  const desc=document.createElement('p');desc.className='tool-muted';desc.textContent=step===2?'삼빛라이프케어의 150·250·340 상품 중 선택하세요. 실제 포함 품목은 계약 전 확인해주세요.':'선택에 따라 예상금액이 바로 달라집니다. 상품가격 외의 금액은 실제 시설요금이 아닌 예시 예산이며 직접 수정할 수 있습니다.';area.append(desc);
-  const opts=document.createElement('div');opts.className='cost-options';groups[step].forEach((c,i)=>{
-   const b=document.createElement('button');b.type='button';b.className='cost-option';b.setAttribute('aria-pressed',String(picks[step]===i));
-   const t=document.createElement('strong');t.textContent=c.name;const small=document.createElement('small');small.textContent=fmt(c.amount)+(c.official?' · 상품가격':' · 예시 예산')+(c.note?' / '+c.note:'');b.append(t,small);
-   b.onclick=()=>{picks[step]=i;amounts[step]=c.amount;render()};opts.append(b)
-  });area.append(opts);
-  if(step!==2){const wrap=document.createElement('div');wrap.className='cost-entry';const label=document.createElement('label');label.htmlFor='cost-input';label.textContent=names[step]+' 예산 조정 (원)';const input=document.createElement('input');input.id='cost-input';input.type='number';input.min='0';input.step='10000';input.inputMode='numeric';input.value=amount(step);input.oninput=()=>{amounts[step]=Math.max(0,Number(input.value)||0);updateSummary()};const help=document.createElement('small');help.textContent='예시 금액입니다. 실제 견적을 받았다면 해당 금액으로 수정하세요. 0원은 무료라는 뜻이 아닙니다.';wrap.append(label,input,help);area.append(wrap)}
-  if(step===0){const warning=document.createElement('p');warning.className='tool-muted';warning.textContent='※ 장례형태 예산과 장례식장 시설비가 중복되지 않도록 실제 견적에서 조정해 주세요.';area.append(warning)}
- }else{
-  const note=document.createElement('p');note.className='tool-muted';note.textContent='아래 예상합계에는 삼빛라이프케어 상품가격과 시설·화장·장지 등의 가정 예산이 모두 포함되어 있습니다. 확인되지 않은 예산은 실제 비용과 다를 수 있으며, 확정 견적이 아닙니다.';area.append(note);
-  const a=document.createElement('a');a.href='tel:01057349121';a.className='cta';a.textContent='☎ 삼빛라이프케어 상세 견적 상담';area.append(a);
- }
- back.disabled=step===0;next.textContent=step===6?'처음부터 다시 확인':'다음 단계 →';updateSummary();
-}
+ if(step<6){const desc=document.createElement('p');desc.className='tool-muted';desc.textContent=step===2?'150·250·340만 원은 삼빛라이프케어 상품 안내가격입니다. 선택 즉시 합산됩니다.':'각 항목을 누르면 계산용 예산이 즉시 합산됩니다. 표시 금액은 실제 시설 요금이 아닌 예시이며 직접 수정할 수 있습니다.';area.append(desc);
+ const opts=document.createElement('div');opts.className='cost-options';groups[step].forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.className='cost-option';b.setAttribute('aria-pressed',String(picks[step]===i));const t=document.createElement('strong');t.textContent=c.name;const small=document.createElement('small');small.textContent=fmt(c.price)+(step===2?' · 상품 안내가격':' · 수정 가능한 예시 예산');b.append(t,small);b.onclick=()=>{picks[step]=i;amounts[step]=c.price;render()};opts.append(b)});area.append(opts);
+ if(step!==2&&picks[step]!==null){const wrap=document.createElement('div');wrap.className='cost-entry';const label=document.createElement('label');label.htmlFor='cost-input';label.textContent=names[step]+' 예산 수정 (원)';const input=document.createElement('input');input.id='cost-input';input.type='number';input.min='0';input.step='10000';input.inputMode='numeric';input.value=String(amounts[step]);input.oninput=()=>{amounts[step]=Math.max(0,Number(input.value)||0);summary()};const help=document.createElement('small');help.textContent='계산용 가정값입니다. 실제 시설 안내 금액을 알고 있다면 변경하세요. 0원은 무료라는 뜻이 아닙니다.';wrap.append(label,input,help);area.append(wrap)}
+ }else{const note=document.createElement('p');note.className='tool-muted';note.textContent='선택한 항목별 예상 합계입니다. 삼빛라이프케어 상품 외 항목은 예시 예산이며 실제 계약·시설·관내외 조건에 따라 달라집니다.';area.append(note);const a=document.createElement('a');a.href='tel:01057349121';a.className='cta';a.textContent='☎ 삼빛라이프케어 상세 견적 상담';area.append(a)}
+ back.disabled=step===0;next.textContent=step===6?'처음부터 다시 확인':'다음 단계 →';summary()}
 back.onclick=()=>{if(step>0){step--;render()}};
-next.onclick=()=>{if(step===6){step=0;for(let i=0;i<6;i++){picks[i]=0;amounts[i]=groups[i][0].amount}}else step++;render()};
-render();
-})();</script></body></html>
+next.onclick=()=>{if(step===6){step=0;picks.fill(null);amounts.fill(null)}else step++;render()};render();
+})();</script><a href="./obituary.html" id="sambit-obituary-entry" style="position:fixed;right:16px;bottom:18px;z-index:999;background:#0c483b;color:white;border:1px solid #c7aa76;border-radius:999px;padding:12px 19px;box-shadow:0 6px 25px #0003;font-weight:700;text-decoration:none;font-size:14px" aria-label="삼빛라이프케어 모바일 부고장 만들기">✉ 모바일 부고장 만들기</a></body></html>
