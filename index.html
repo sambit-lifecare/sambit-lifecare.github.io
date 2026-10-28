@@ -468,6 +468,27 @@ img,video{max-width:100%}
 .sambit-chat{padding:14px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:10px}.sambit-bubble{padding:12px 14px;border-radius:14px;background:#edf2ed;font-size:14px;line-height:1.75;white-space:pre-line;max-width:94%;align-self:flex-start}.sambit-bubble.user{background:#d8ede4;align-self:flex-end}.sambit-choices{display:flex;flex-wrap:wrap;gap:7px}.sambit-choices button{background:white;color:#07513f;border:1px solid #9db8a9;border-radius:20px;padding:9px 11px;font-size:13px}.sambit-choices a{display:inline-block;background:#07513f;color:white;padding:9px 12px;border-radius:20px;font-size:13px}.sambit-input{display:flex;gap:6px;padding:10px;border-top:1px solid #ddd;background:white}.sambit-input input{flex:1;min-width:0;border:1px solid #cfd7d0;border-radius:10px;padding:10px;font-size:14px}.sambit-input button{background:#07513f;color:white;border:0;border-radius:10px;padding:10px 13px}.sambit-disclaimer{font-size:11px;color:#6a756e;padding:0 12px 8px;background:white}
 @media(max-width:640px){.sambit-actions{width:205px;gap:5px}.sambit-action{min-height:41px;padding:5px 9px;font-size:12px}.sambit-action .sambit-face,.sambit-action .symbol{width:31px;height:31px}.sambit-mascot{right:160px;width:34px;height:34px}@keyframes sambit-arrive{0%{transform:translateY(0);opacity:0}15%{opacity:1}85%{transform:translateY(-91px)}100%{transform:translateY(-97px) scale(0);opacity:0}}}
 @media(prefers-reduced-motion:reduce){.sambit-mascot{display:none}}
+</style><style id="sambit-round-actions-20261028">
+/* Three compact circular shortcuts; expand to the existing readable rectangular layout. */
+.sambit-actions{width:58px!important;align-items:flex-end;transition:width .35s ease;gap:8px}
+.sambit-actions .sambit-action{width:54px;min-width:54px;height:54px;min-height:54px;padding:5px;border-radius:50%;justify-content:center;overflow:hidden;transition:width .35s ease,border-radius .35s ease,padding .35s ease;white-space:nowrap}
+.sambit-actions .sambit-action strong,.sambit-actions .sambit-action .arrow{display:none}
+.sambit-actions .sambit-action .sambit-face{width:40px;height:40px}
+.sambit-actions .sambit-action .symbol{width:40px;height:40px;display:grid;place-items:center;font-size:23px}
+.sambit-actions[data-expanded="true"]{width:min(255px,calc(100vw - 24px))!important}
+.sambit-actions[data-expanded="true"] .sambit-action{width:100%;height:auto;min-height:52px;border-radius:12px;padding:6px 12px;justify-content:flex-start}
+.sambit-actions[data-expanded="true"] .sambit-action strong{display:block;flex:1;white-space:normal;line-height:1.35}
+.sambit-actions[data-expanded="true"] .sambit-action .arrow{display:block}
+.sambit-actions .sambit-mascot{display:none}
+@media(max-width:640px){.sambit-actions{width:52px!important}.sambit-actions .sambit-action{width:49px;min-width:49px;height:49px;min-height:49px}.sambit-actions .sambit-action .sambit-face{width:37px;height:37px}.sambit-actions .sambit-action .symbol{width:37px;height:37px}.sambit-actions[data-expanded="true"]{width:min(235px,calc(100vw - 24px))!important}.sambit-actions[data-expanded="true"] .sambit-action{min-height:49px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.sambit-actions,.sambit-actions .sambit-action{transition:none}}
+</style><style id="sambit-bot-circle-visible-fix">
+/* 상담사 원형 버튼은 일반 아이콘 대신 실제 상담사 캐릭터 이미지로 표시 */
+#sambit-quick-actions #sambit-chat-open{padding:3px!important;background:#07513f!important;border:2px solid #d5b784!important;overflow:hidden}
+#sambit-quick-actions #sambit-chat-open .sambit-face{display:block!important;width:100%!important;height:100%!important;max-width:none!important;flex:1 0 auto!important;object-fit:cover!important;object-position:center 25%!important;border:0!important;border-radius:50%!important;background:#f2f3e9!important}
+#sambit-quick-actions[data-expanded="true"] #sambit-chat-open{padding:6px 12px!important;overflow:visible}
+#sambit-quick-actions[data-expanded="true"] #sambit-chat-open .sambit-face{width:40px!important;height:40px!important;flex:0 0 40px!important;border:2px solid #fff!important}
+@media(max-width:640px){#sambit-quick-actions[data-expanded="true"] #sambit-chat-open .sambit-face{width:35px!important;height:35px!important;flex-basis:35px!important}}
 </style></head><body>
 <header><div class="nav"><a class="brand" href="#home"><span class="heart" aria-hidden="true"><svg viewBox="0 0 64 64" width="46" height="46"><path d="M32 56 C18 46 6 35 6 21 C6 11 13 6 22 6 C27 6 30 9 32 13 C35 8 40 6 45 6 C55 6 60 13 58 24 C56 36 44 48 32 56Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><text x="32" y="35" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="700" fill="currentColor">心</text></svg></span><span>삼빛라이프케어</span></a><nav class="navlinks"><a href="#home">홈</a><a href="#about">회사 소개</a><a href="#plans">서비스 안내</a><a href="#approach">상담 원칙</a><a href="#media">영상·사진</a><a href="#reviews">고객후기</a><a href="#prepare">사전 상담</a></nav><a class="cta" href="tel:01057349121"><span aria-hidden="true">☎</span> 상담연결</a></div></header>
 <section class="hero" id="home"><div class="hero-content"><h1>소중한 마지막 길,<br>삼빛라이프케어가<br>함께합니다</h1><p>고인을 존중하고, 유가족의 마음까지 세심하게<br>모시는 장례 서비스를 제공합니다.</p></div><div class="hero-picture" id="heroSlider" role="button" tabindex="0" aria-label="메인 장례 사진 자동 슬라이드"><img id="heroSlideImage" src="images/hero_private_01.jpg" alt="가상 인물로 재구성한 장례 행렬 이미지" loading="eager"></div></section>
@@ -697,17 +718,17 @@ function render(){progress.replaceChildren();names.forEach((n,i)=>{const b=docum
  back.disabled=step===0;next.textContent=step===6?'처음부터 다시 확인':'다음 단계 →';summary()}
 back.onclick=()=>{if(step>0){step--;render()}};
 next.onclick=()=>{if(step===6){step=0;picks.fill(null);amounts.fill(null)}else step++;render()};render();
-})();</script><div class="sambit-actions" aria-label="삼빛 빠른 상담">
+})();</script><div class="sambit-actions" id="sambit-quick-actions" aria-label="삼빛 빠른 상담" data-expanded="false">
 <span class="sambit-mascot" aria-hidden="true"><img src="sambit-counselor.png" alt=""></span>
-<button class="sambit-action" id="sambit-chat-open" type="button"><img class="sambit-face" src="sambit-counselor.png" alt=""><strong>삼빛 상담사</strong><span class="arrow">›</span></button>
-<a class="sambit-action" href="tel:01057349121"><span class="symbol">☎</span><strong>24시간 전화 상담</strong><span class="arrow">›</span></a>
+<button class="sambit-action" id="sambit-chat-open" type="button" aria-label="삼빛 상담사 챗봇 열기"><img class="sambit-face" src="sambit-counselor.png" alt=""><strong>삼빛 상담사</strong><span class="arrow">›</span></button>
+<a class="sambit-action" href="tel:01057349121" aria-label="삼빛 상담사에게 전화 연결"><span class="symbol">☎</span><strong>삼빛 상담사에게 전화 연결</strong><span class="arrow">›</span></a>
 <a class="sambit-action" href="./obituary.html" id="sambit-obituary-entry"><span class="symbol">✉</span><strong>모바일 부고장 만들기</strong><span class="arrow">›</span></a>
 </div>
 <section class="sambit-dialog" id="sambit-chat-dialog" role="dialog" aria-modal="true" aria-label="삼빛 상담사" hidden>
 <div class="sambit-dialog-header"><img src="sambit-counselor.png" alt="삼빛 상담사 캐릭터"><strong>삼빛 상담사<br><small>24시간 무료 장례 절차 안내</small></strong><button type="button" id="sambit-chat-close" aria-label="상담창 닫기">×</button></div>
 <div class="sambit-chat" id="sambit-chat-messages" aria-live="polite"></div>
 <form class="sambit-input" id="sambit-chat-form"><input id="sambit-chat-question" maxlength="160" autocomplete="off" placeholder="장례 절차·시설 주소·이동시간을 물어보세요" aria-label="상담 질문"><button type="submit">보내기</button></form>
-<div class="sambit-disclaimer">무료 자동 안내입니다. 주소·이동시간은 지도에서 직접 확인해 주세요. 개인정보는 입력하지 마세요. 시설별 조건·비용은 해당 기관에 확인하세요.</div>
+
 </section><script id="sambit-counselor-script">(()=>{
 const dialog=document.getElementById('sambit-chat-dialog'), messages=document.getElementById('sambit-chat-messages'), input=document.getElementById('sambit-chat-question');
 const PHONE='tel:01057349121', SKY='https://www.15774129.go.kr/';
@@ -726,7 +747,7 @@ natural:{text:'자연장·수목장은 시설별 이용 자격, 안치 방식, �
 columbarium:{text:'봉안당은 안치 가능 자리, 사용 기간·관리비, 관내·관외 요금 등을 확인하세요. 일반적으로 화장증명서, 신청인 신분증, 관계 증빙서류 등을 요구할 수 있으나 시설별로 다릅니다.',options:[['전국 시설·가격 확인','goFacilities'],['전화 상담','phone']]},
 veteran:{text:'국립호국원은 누구나 이용하는 시설이 아니며 국가유공자 등 법정 안장 대상 여부와 사전 심사·승인이 중요합니다. 신청인·고인 신분 및 관계 서류, 대상 자격 증빙, 사망·화장 관련 서류 등은 국립묘지 안장신청 안내에서 정확히 확인하세요. 승인 전에 안장이 확정된 것으로 판단하지 마세요.',options:[['국립묘지 안장신청 안내','goVeteran'],['전화 상담','phone']]},
 cost:{text:'삼빛 홈페이지의 장례서비스 상담 기준 금액은 고요한 배웅 150만 원, 가족의 온기 250만 원, 품격 있는 동행 340만 원입니다. 장례식장·식사·화장·장지 등은 별도일 수 있습니다. 전국 시설 요금은 지역·시설·관내외 조건에 따라 다르므로 공식 정보에서 확인해야 합니다.',options:[['7단계 예상비용 계산','goCost'],['전국 시설·가격 확인','goFacilities'],['전화 상담','phone']]},
-phone:{text:'상황에 맞는 자세한 안내가 필요하시면 삼빛 전화 상담으로 연결해 드리겠습니다.',options:[['☎ 010-5734-9121 전화 연결','goPhone'],['처음부터 안내','start']]},
+phone:{text:'상황에 맞는 자세한 안내가 필요하시면 삼빛 전화 상담으로 연결해 드리겠습니다.',options:[['☎ 삼빛 상담사에게 전화 연결','goPhone'],['처음부터 안내','start']]},
 unknown:{text:'말씀하신 내용은 무료 자동 안내에서 정확히 판단하기 어렵습니다. 아래 항목을 선택하시거나 전화 상담으로 확인해 주세요. 성함·주민등록번호·연락처 등 개인정보는 입력하지 마세요.',options:[['장례 시작','start'],['서류 안내','documents'],['비용 안내','cost'],['전화 상담','phone']]}
 };
 function bubble(text,user=false){const p=document.createElement('div');p.className='sambit-bubble'+(user?' user':'');p.textContent=text;messages.appendChild(p)}
@@ -752,4 +773,15 @@ function classify(q){if(/호국원|국립묘지|국가유공자|보훈/.test(q))
 document.getElementById('sambit-chat-open').addEventListener('click',()=>{dialog.hidden=false;if(!messages.children.length){bubble('안녕하세요. 삼빛 상담사입니다. 장례 준비를 처음부터 차근차근 안내해 드리겠습니다. 무엇을 도와드릴까요?');go('start')}document.getElementById('sambit-chat-close').focus()});
 document.getElementById('sambit-chat-close').addEventListener('click',()=>{dialog.hidden=true;document.getElementById('sambit-chat-open').focus()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dialog.hidden)dialog.hidden=true});
 document.getElementById('sambit-chat-form').addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(!q)return;bubble(q,true);input.value='';if(addressIntent(q))mapAnswer(q);else go(classify(q))});
+})();</script><script id="sambit-round-actions-script">(()=>{
+const dock=document.getElementById('sambit-quick-actions');if(!dock)return;
+const chat=document.getElementById('sambit-chat-open');
+const links=Array.from(dock.querySelectorAll('a.sambit-action'));
+let expanded=false;
+function expand(){expanded=true;dock.dataset.expanded='true';dock.setAttribute('aria-label','삼빛 빠른 상담 메뉴 펼쳐짐');}
+function collapse(){expanded=false;dock.dataset.expanded='false';dock.setAttribute('aria-label','삼빛 빠른 상담 메뉴');}
+links.forEach(a=>a.addEventListener('click',e=>{if(!expanded){e.preventDefault();expand();a.focus();}}));
+chat.addEventListener('click',()=>{if(!expanded)expand();});
+document.addEventListener('pointerdown',e=>{if(expanded&&!dock.contains(e.target)&&!document.getElementById('sambit-chat-dialog').contains(e.target))collapse();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')collapse();});
 })();</script></body></html>
