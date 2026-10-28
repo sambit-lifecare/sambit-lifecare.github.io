@@ -510,7 +510,17 @@ img,video{max-width:100%}
 #record .sb-slide img{width:100%;height:100%;object-fit:fill}
 #record .sb-label{display:none!important}
 @media(max-width:600px){#record .sb-slide{aspect-ratio:6.43/1;flex-basis:100%}#record .sb-carousel{margin:14px auto 20px}}
-</style></head><body>
+</style>
+<style id="sambit-mobile-funeral-photo-final">
+/* PC / mobile: photo-only carousel, no text or arrows */
+#media #galleryCaption,#media #galleryImage,#media .gallery-hidden-controls,#media #photoCounter{display:none!important;visibility:hidden!important;max-height:0!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+#media .sambit-gallery-viewport{display:block!important;position:relative!important;width:100%!important;max-width:100%!important;height:320px!important;overflow:hidden!important;border-radius:10px!important;background:#eee9e2!important}
+#media .sambit-gallery-viewport .sambit-scroll-frame{overflow:hidden!important;height:100%!important}
+#media .sambit-gallery-viewport .sambit-scroll-frame img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;display:block!important}
+@media(max-width:700px){#media .sambit-gallery-viewport{height:260px!important}#media .media>div:nth-child(2){min-width:0!important;overflow:hidden!important}}
+@media(max-width:390px){#media .sambit-gallery-viewport{height:215px!important}}
+</style>
+</head><body>
 <header><div class="nav"><a class="brand" href="#home"><span class="heart" aria-hidden="true"><svg viewBox="0 0 64 64" width="46" height="46"><path d="M32 56 C18 46 6 35 6 21 C6 11 13 6 22 6 C27 6 30 9 32 13 C35 8 40 6 45 6 C55 6 60 13 58 24 C56 36 44 48 32 56Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><text x="32" y="35" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="700" fill="currentColor">心</text></svg></span><span>삼빛라이프케어</span></a><nav class="navlinks"><a href="#home">홈</a><a href="#about">회사 소개</a><a href="#plans">서비스 안내</a><a href="#approach">상담 원칙</a><a href="#media">영상·사진</a><a href="#reviews">고객후기</a><a href="#prepare">사전 상담</a></nav><a class="cta" href="tel:01057349121"><span aria-hidden="true">☎</span> 상담연결</a></div></header>
 <section class="hero" id="home"><div class="hero-content"><h1>소중한 마지막 길,<br>삼빛라이프케어가<br>함께합니다</h1><p>고인을 존중하고, 유가족의 마음까지 세심하게<br>모시는 장례 서비스를 제공합니다.</p></div><div class="hero-picture" id="heroSlider" role="button" tabindex="0" aria-label="메인 장례 사진 자동 슬라이드"><img id="heroSlideImage" src="images/hero_private_01.jpg" alt="가상 인물로 재구성한 장례 행렬 이미지" loading="eager"></div></section>
 <main>
@@ -625,7 +635,7 @@ if('IntersectionObserver' in window){
 <script id="continuous-broadcast-scroll">
 (()=>{
   const mainPhotos=["images/hero_private_01.jpg","images/hero_private_02.jpg","images/hero_private_03.jpg","images/hero_private_05.jpg","images/hero_private_07.jpg","images/hero_private_09.jpg"];
-  const galleryPhotos=['images/case_01.jpg','images/case_02.jpg','images/case_03.jpg','images/case_04.jpg','images/case_05.jpg','images/case_06.jpg','images/case_07.jpg','images/case_08.jpg','images/case_09.jpg','images/case_10.jpg','images/case_11.jpg','images/case_12.jpg','images/case_13.jpg','images/case_14.jpg','images/case_15.jpg'];
+  const galleryPhotos=['funeral-ai-01.jpg','funeral-ai-02.jpg','funeral-ai-03.jpg','funeral-ai-04.jpg','funeral-ai-05.jpg','funeral-ai-06.jpg','funeral-ai-07.jpg','funeral-ai-08.jpg','funeral-ai-09.jpg'];
   function build(viewport, pictures, label){
     if(!viewport||!pictures.length)return;
     const first=viewport.querySelector('img');

@@ -1,6 +1,1 @@
-삼빛라이프케어 업로드용
-1. ZIP 압축을 풉니다.
-2. index.html과 partner-01.jpg ~ partner-10.jpg 파일을 GitHub 저장소 루트에 업로드합니다.
-3. Commit changes를 누릅니다.
-4. 작업안내 파일은 올리지 않아도 됩니다.
-주의: 기관 클릭은 현재 네이버 지도 기관명 검색 링크이며, 확정된 도로명 주소 링크가 아닙니다.
+index.html, partner-01.jpg~partner-10.jpg, funeral-ai-01.jpg~funeral-ai-09.jpg 총 20개 파일을 GitHub 저장소 최상위에 업로드하세요. 기존 images 폴더는 삭제하지 마세요. 장례 사진은 AI 연출 이미지이며 실제 장례 현장 사진이 아닙니다.
