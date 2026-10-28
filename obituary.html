@@ -26,8 +26,37 @@ el('login-btn').onclick=async()=>{const email=el('login-email').value.trim(),pas
 el('logout-btn').onclick=()=>{token='';cardId='';setLogin(false);status('로그아웃했습니다.')};
 el('form').addEventListener('submit',async e=>{e.preventDefault();if(!token){status('관리자 로그인이 필요합니다.');return}const d=get();if(!d.deceased||!d.relation||!d.funeral||!d.departure){status('필수 항목을 입력해 주세요.');return}render(d);data=d;status('서버에 저장 중...');try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+token},body:JSON.stringify(d)});const j=await r.json();if(!r.ok||!j.id)throw Error(j.error||'저장 실패');cardId=j.id;status('서버 저장 완료! 이제 공유 링크를 복사할 수 있습니다.')}catch(e){status('저장하지 못했습니다: '+e.message)}});
 el('form').addEventListener('input',()=>{if(cardId){cardId='';status('내용이 바뀌었습니다. 새 부고장으로 다시 저장해 주세요.')}render(get())});
-const dl=el('funeral-list');facilities.forEach(f=>{const o=document.createElement('option');o.value=f.name;dl.appendChild(o)});
-el('funeral').addEventListener('change',()=>{const f=facilities.find(x=>x.name===el('funeral').value);if(f){el('address').value=f.address;render(get())}});
+// 장례식장 이름이 같아도 주소를 혼동하지 않도록 지역별 선택지를 구분합니다.
+const dl=el('funeral-list');
+const facilityOptions=new Map();
+facilities.forEach(f=>{
+  const o=document.createElement('option');
+  // 지역이 표시된 선택지를 사용하되, 저장되는 장례식장 이름에는 주소를 붙이지 않습니다.
+  const label=f.name+' — '+f.address;
+  o.value=label;
+  facilityOptions.set(label,f);
+  dl.appendChild(o);
+});
+function fillFuneralAddress(){
+  const input=el('funeral');
+  const value=input.value.trim();
+  let found=facilityOptions.get(value);
+  if(!found){
+    const matches=facilities.filter(f=>f.name===value);
+    if(matches.length===1)found=matches[0];
+    if(matches.length>1){status('같은 이름의 장례식장이 여러 곳입니다. 목록에서 지역과 주소까지 확인하여 선택해 주세요.');return}
+  }
+  if(found){
+    input.value=found.name;
+    el('address').value=found.address;
+    render(get());
+    status('장례식장 주소가 자동 입력되었습니다. 실제 주소를 확인해 주세요.');
+  }
+}
+el('funeral').addEventListener('change',fillFuneralAddress);
+el('funeral').addEventListener('input',()=>{
+  if(facilityOptions.has(el('funeral').value))fillFuneralAddress();
+});
 el('copy-account').onclick=async()=>{if(!data.account)return;try{await navigator.clipboard.writeText(data.account);status('계좌번호를 복사했습니다.')}catch(e){prompt('계좌번호를 복사하세요.',data.account)}};
 el('map').onclick=()=>{const d=publicView?data:get();const address=(d.address||'').trim();const name=(d.funeral||'').trim();if(!address&&!name){status('장례식장 주소를 입력하세요.');return}const query=address||name;const url='https://map.naver.com/p/search/'+encodeURIComponent(query);window.location.href=url};
 el('sample').onclick=()=>{cardId='';apply({deceased:'김○○',relation:'배우자 이○○\n아들 김○○ · 딸 김○○',funeral:'삼빛장례식장 (샘플)',room:'2층 1호실',address:'부산광역시 ○○구 ○○로 (샘플)',departure:'2026-11-01T08:00',burial:'○○추모공원',message:'고인의 따뜻한 사랑을 기억하며, 삼가 별세 소식을 전합니다.'});status('샘플입니다. 실제 부고장으로 사용하지 마세요.')};
