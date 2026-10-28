@@ -539,6 +539,44 @@ img,video{max-width:100%}
 #media .sambit-gallery-viewport .sambit-scroll-track{display:none!important}
 @media(max-width:760px){#media .sambit-gallery-viewport{aspect-ratio:16/10!important;height:auto!important}}
 </style>
+
+<style id="sambit-gallery-mobile-reliable-20261028">
+/* 장례사진에만 적용. 터치 기기에서도 CSS 자체가 재생하며 다른 사진은 한 번에 표시되지 않음. */
+#media .sambit-gallery-viewport.sambit-fixed-gallery {
+  position:relative!important;display:block!important;width:100%!important;
+  height:auto!important;aspect-ratio:16/10!important;overflow:hidden!important;
+  background:#18372f!important;isolation:isolate!important;
+}
+#media .sambit-fixed-gallery .sambit-fixed-gallery-photo {
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  max-width:none!important;max-height:none!important;display:block!important;
+  object-fit:contain!important;object-position:center center!important;
+  transform:none!important;transition:none!important;
+  opacity:0!important;visibility:visible!important;
+  animation:sambitPhotoCycle 45s linear infinite!important;
+  animation-delay:calc(var(--photo-index) * -5s)!important;
+  pointer-events:none!important;
+}
+@keyframes sambitPhotoCycle {
+  0%,10.8% {opacity:1}
+  11.111%,99.999% {opacity:0}
+  100% {opacity:1}
+}
+@media (hover:hover) and (pointer:fine) {
+  #media .sambit-fixed-gallery:hover .sambit-fixed-gallery-photo {animation-play-state:paused!important}
+}
+@media(max-width:760px){
+  #media .sambit-gallery-viewport.sambit-fixed-gallery{width:100%!important;aspect-ratio:16/10!important;height:auto!important}
+  #media .sambit-fixed-gallery .sambit-fixed-gallery-photo{object-fit:contain!important}
+}
+</style>
+<style id="sambit-curated-gallery-final-20261028">
+#media #sambit-curated-gallery{display:block!important;position:relative!important;overflow:hidden!important;isolation:isolate!important;width:100%!important;height:350px!important;background:#f2eee7!important;border-radius:10px!important}
+#media #sambit-curated-gallery img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;opacity:0!important;visibility:hidden!important;transform:none!important;animation:none!important;transition:opacity .7s ease!important;pointer-events:none!important}
+#media #sambit-curated-gallery img.is-current{opacity:1!important;visibility:visible!important}
+#media #galleryImage{display:none!important}
+@media(max-width:700px){#media #sambit-curated-gallery{height:290px!important}}
+</style>
 </head><body>
 <header><div class="nav"><a class="brand" href="#home"><span class="heart" aria-hidden="true"><svg viewBox="0 0 64 64" width="46" height="46"><path d="M32 56 C18 46 6 35 6 21 C6 11 13 6 22 6 C27 6 30 9 32 13 C35 8 40 6 45 6 C55 6 60 13 58 24 C56 36 44 48 32 56Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><text x="32" y="35" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="700" fill="currentColor">心</text></svg></span><span>삼빛라이프케어</span></a><nav class="navlinks"><a href="#home">홈</a><a href="#about">회사 소개</a><a href="#plans">서비스 안내</a><a href="#approach">상담 원칙</a><a href="#media">영상·사진</a><a href="#reviews">고객후기</a><a href="#prepare">사전 상담</a></nav><a class="cta" href="tel:01057349121"><span aria-hidden="true">☎</span> 상담연결</a></div></header>
 <section class="hero" id="home"><div class="hero-content"><h1>소중한 마지막 길,<br>삼빛라이프케어가<br>함께합니다</h1><p>고인을 존중하고, 유가족의 마음까지 세심하게<br>모시는 장례 서비스를 제공합니다.</p></div><div class="hero-picture" id="heroSlider" role="button" tabindex="0" aria-label="메인 장례 사진 자동 슬라이드"><img id="heroSlideImage" src="images/hero_private_01.jpg" alt="가상 인물로 재구성한 장례 행렬 이미지" loading="eager"></div></section>
@@ -684,51 +722,33 @@ if('IntersectionObserver' in window){
     viewport.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});
   }
   build(document.getElementById('heroSlider'),mainPhotos,'메인');
+  // 엄선된 장례사진만 한 장씩 전환. 향후 사진 추가 시 아래 배열에 파일명을 추가합니다.
+  const selectedPhotos=['funeral-ai-05.jpg','funeral-ai-06.jpg','funeral-ai-08.jpg'];
   const galleryImage=document.getElementById('galleryImage');
   if(galleryImage){
     const viewport=document.createElement('div');
-    viewport.className='sambit-gallery-viewport';
+    viewport.id='sambit-curated-gallery';
+    viewport.setAttribute('aria-label','장례 사진 자동재생');
     galleryImage.after(viewport);
     galleryImage.style.setProperty('display','none','important');
-    galleryImage.setAttribute('aria-hidden','true');
-    // 장례 사진 전용: 한 화면에 한 장만 표시하고 페이드로 전환
-    const still=document.createElement('img');
-    still.className='sambit-single-gallery-photo';
-    still.alt='삼빛상조 장례 서비스 사진';
-    still.src=galleryPhotos[0];
-    still.loading='eager';
-    viewport.appendChild(still);
-    let current=0, stopped=false, switching=false;
-    const advance=()=>{
-      if(stopped||switching)return;
-      switching=true;
-      const next=(current+1)%galleryPhotos.length;
-      const preload=new Image();
-      preload.onload=()=>{
-        still.classList.add('changing');
-        setTimeout(()=>{
-          still.src=galleryPhotos[next];
-          current=next;
-          requestAnimationFrame(()=>still.classList.remove('changing'));
-          setTimeout(()=>{switching=false},420);
-        },260);
-      };
-      preload.onerror=()=>{switching=false};
-      preload.src=galleryPhotos[next];
-    };
-    const timer=setInterval(advance,4500);
-    viewport.setAttribute('role','button');
-    viewport.tabIndex=0;
-    viewport.setAttribute('aria-label','장례 사진 자동재생. 누르면 일시정지 또는 재생');
-    const toggle=()=>{stopped=!stopped;viewport.setAttribute('aria-pressed',String(stopped))};
-    viewport.addEventListener('click',toggle);
-    viewport.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});
-    viewport.addEventListener('mouseenter',()=>{stopped=true});
-    viewport.addEventListener('mouseleave',()=>{stopped=false});
+    selectedPhotos.forEach((src,i)=>{
+      const img=document.createElement('img');
+      img.src=src;img.alt='삼빛상조 장례 서비스 사진 '+(i+1);
+      img.loading='eager';img.decoding='async';
+      if(i===0)img.classList.add('is-current');
+      viewport.appendChild(img);
+    });
+    let current=0;
+    const slides=[...viewport.querySelectorAll('img')];
+    if(slides.length>1){
+      setInterval(()=>{
+        slides[current].classList.remove('is-current');
+        current=(current+1)%slides.length;
+        slides[current].classList.add('is-current');
+      },5000);
+    }
     const caption=document.getElementById('galleryCaption');
     if(caption)caption.style.setProperty('display','none','important');
-    const controls=document.querySelector('#media .gallery-hidden-controls');
-    if(controls)controls.style.setProperty('display','none','important');
   }
 })();
 </script>
