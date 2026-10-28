@@ -571,11 +571,11 @@ img,video{max-width:100%}
 }
 </style>
 <style id="sambit-curated-gallery-final-20261028">
-#media #sambit-curated-gallery{display:block!important;position:relative!important;overflow:hidden!important;isolation:isolate!important;width:100%!important;height:350px!important;background:#f2eee7!important;border-radius:10px!important}
+#media #sambit-curated-gallery{display:block!important;position:relative!important;overflow:hidden!important;isolation:isolate!important;width:100%!important;height:auto!important;aspect-ratio:16/10!important;background:#f2eee7!important;border-radius:10px!important}
 #media #sambit-curated-gallery img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;opacity:0!important;visibility:hidden!important;transform:none!important;animation:none!important;transition:opacity .7s ease!important;pointer-events:none!important}
 #media #sambit-curated-gallery img.is-current{opacity:1!important;visibility:visible!important}
 #media #galleryImage{display:none!important}
-@media(max-width:700px){#media #sambit-curated-gallery{height:290px!important}}
+@media(max-width:700px){#media #sambit-curated-gallery{height:auto!important;aspect-ratio:16/10!important}}
 </style>
 </head><body>
 <header><div class="nav"><a class="brand" href="#home"><span class="heart" aria-hidden="true"><svg viewBox="0 0 64 64" width="46" height="46"><path d="M32 56 C18 46 6 35 6 21 C6 11 13 6 22 6 C27 6 30 9 32 13 C35 8 40 6 45 6 C55 6 60 13 58 24 C56 36 44 48 32 56Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><text x="32" y="35" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="700" fill="currentColor">心</text></svg></span><span>삼빛라이프케어</span></a><nav class="navlinks"><a href="#home">홈</a><a href="#about">회사 소개</a><a href="#plans">서비스 안내</a><a href="#approach">상담 원칙</a><a href="#media">영상·사진</a><a href="#reviews">고객후기</a><a href="#prepare">사전 상담</a></nav><a class="cta" href="tel:01057349121"><span aria-hidden="true">☎</span> 상담연결</a></div></header>
@@ -723,7 +723,7 @@ if('IntersectionObserver' in window){
   }
   build(document.getElementById('heroSlider'),mainPhotos,'메인');
   // 엄선된 장례사진만 한 장씩 전환. 향후 사진 추가 시 아래 배열에 파일명을 추가합니다.
-  const selectedPhotos=['funeral-ai-05.jpg','funeral-ai-06.jpg','funeral-ai-08.jpg'];
+  const selectedPhotos=['sambit-real-01.jpg', 'sambit-real-02.jpg', 'sambit-real-03.jpg', 'sambit-real-04.jpg'];
   const galleryImage=document.getElementById('galleryImage');
   if(galleryImage){
     const viewport=document.createElement('div');
@@ -733,7 +733,7 @@ if('IntersectionObserver' in window){
     galleryImage.style.setProperty('display','none','important');
     selectedPhotos.forEach((src,i)=>{
       const img=document.createElement('img');
-      img.src=src;img.alt='삼빛상조 장례 서비스 사진 '+(i+1);
+      img.src=src;img.alt='장례 현장 사진 '+(i+1);
       img.loading='eager';img.decoding='async';
       if(i===0)img.classList.add('is-current');
       viewport.appendChild(img);
