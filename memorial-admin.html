@@ -2,7 +2,7 @@
 import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
 const BASE='https://pdueejkiwlfhacsvyaux.supabase.co';
 // 공개 가능한 publishable/anon key만 입력하세요. service_role 또는 secret key는 절대 입력하지 마세요.
-const PUBLIC_KEY='REPLACE_WITH_SUPABASE_PUBLISHABLE_OR_ANON_KEY';
+const PUBLIC_KEY='sb_publishable_80i1VypishPtoeaiLntTFw_60rW5JwT';
 const API=BASE+'/functions/v1/memorial-api';
 const $=id=>document.getElementById(id);
 const supabase=createClient(BASE,PUBLIC_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
