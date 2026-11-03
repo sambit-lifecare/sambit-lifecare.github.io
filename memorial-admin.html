@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>추모영상 관리자 | 삼빛라이프케어</title><style>:root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#243047;background:#f5f7fb}body{margin:0}main{max-width:1100px;margin:35px auto;padding:0 18px}h1{font-size:25px}.panel{background:white;border:1px solid #e1e6ee;border-radius:14px;padding:20px;margin:16px 0;box-shadow:0 3px 15px #17243b09}input,select,button{font:inherit;padding:10px;border:1px solid #cbd5e1;border-radius:8px}input{max-width:100%;box-sizing:border-box}button{cursor:pointer;background:#193d69;color:white;border:0}button.secondary{background:#e9eef5;color:#243047}button:disabled{opacity:.55;cursor:not-allowed}.flex{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.grow{flex:1}.muted{color:#66758a;font-size:14px}.error{color:#ae2434;white-space:pre-wrap}.ok{color:#176b43}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:10px;border-bottom:1px solid #e5e9f0;text-align:left;vertical-align:top}th{background:#f6f8fb}td{overflow-wrap:anywhere}.scroll{overflow:auto}textarea{width:100%;min-height:75px;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:8px;padding:10px}img.preview{width:150px;height:120px;object-fit:contain;background:#f5f5f5;border-radius:8px}.photos{display:flex;gap:12px;flex-wrap:wrap}.photo{display:grid;gap:6px}#app[hidden], [hidden]{display:none!important}</style></head><body><main><h1>추모영상 관리자</h1><p class="muted">삼빛라이프케어 · 관리자 전용 접수 확인</p><section class="panel" id="login"><h2>관리자 로그인</h2><form id="loginForm" class="flex"><input id="email" type="email" placeholder="관리자 이메일" autocomplete="username" required><input id="password" type="password" placeholder="비밀번호" autocomplete="current-password" required><button id="loginBtn">로그인</button></form><p class="muted">Supabase Authentication에 등록되고 memorial_admins에 승인된 계정만 사용할 수 있습니다.</p><p id="loginError" class="error" role="alert"></p></section><div id="app" hidden><section class="panel flex"><strong id="who" class="grow"></strong><button class="secondary" id="refresh">새로고침</button><button class="secondary" id="logout">로그아웃</button></section><p id="notice" role="status"></p><section class="panel"><h2>신청 접수 목록</h2><div class="scroll"><table><thead><tr><th>접수일</th><th>고인 / 종류</th><th>신청자</th><th>상태</th><th>사진</th><th>관리</th></tr></thead><tbody id="orders"></tbody></table></div></section><section id="detail" class="panel" hidden><h2>신청 상세</h2><div id="info"></div><h3>사진</h3><p class="muted">사진 링크는 10분 동안만 유효합니다. 개인정보 보호를 위해 공유하지 마세요.</p><div id="photos" class="photos"></div><h3>제작 관리</h3><div class="flex"><label>상태 <select id="status"><option value="submitted">접수</option><option value="payment_verified">입금 확인</option><option value="producing">제작중</option><option value="completed">제작완료</option><option value="cancelled">취소</option></select></label><label>영상 URL <input id="video" type="url" placeholder="https://..."></label><button id="save">변경 저장</button></div><p class="muted">제작중/제작완료는 입금 확인 이후에만 가능합니다. 영상 공개 및 장례 종료 설정은 이 페이지에서 변경하지 않습니다.</p></section></div></main><script type="module">
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>추모영상 관리자 | 삼빛라이프케어</title><style>:root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#243047;background:#f5f7fb}body{margin:0}main{max-width:1100px;margin:35px auto;padding:0 18px}h1{font-size:25px}.panel{background:white;border:1px solid #e1e6ee;border-radius:14px;padding:20px;margin:16px 0;box-shadow:0 3px 15px #17243b09}input,select,button{font:inherit;padding:10px;border:1px solid #cbd5e1;border-radius:8px}input{max-width:100%;box-sizing:border-box}button{cursor:pointer;background:#193d69;color:white;border:0}button.secondary{background:#e9eef5;color:#243047}button:disabled{opacity:.55;cursor:not-allowed}.flex{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.grow{flex:1}.muted{color:#66758a;font-size:14px}.error{color:#ae2434;white-space:pre-wrap}.ok{color:#176b43}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:10px;border-bottom:1px solid #e5e9f0;text-align:left;vertical-align:top}th{background:#f6f8fb}td{overflow-wrap:anywhere}.scroll{overflow:auto}textarea{width:100%;min-height:75px;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:8px;padding:10px}img.preview{width:150px;height:120px;object-fit:contain;background:#f5f5f5;border-radius:8px}.photos{display:flex;gap:12px;flex-wrap:wrap}.photo{display:grid;gap:6px}#app[hidden], [hidden]{display:none!important}</style></head><body><main><h1>추모영상 관리자</h1><p class="muted">삼빛라이프케어 · 관리자 전용 접수 확인</p><section class="panel" id="login"><h2>관리자 로그인</h2><form id="loginForm" class="flex"><input id="email" type="email" placeholder="관리자 이메일" autocomplete="username" required><input id="password" type="password" placeholder="비밀번호" autocomplete="current-password" required><button id="loginBtn">로그인</button></form><p class="muted">Supabase Authentication에 등록되고 memorial_admins에 승인된 계정만 사용할 수 있습니다.</p><p id="loginError" class="error" role="alert"></p></section><div id="app" hidden><section class="panel flex"><strong id="who" class="grow"></strong><button class="secondary" id="refresh">새로고침</button><button class="secondary" id="logout">로그아웃</button></section><p id="notice" role="status"></p><section class="panel"><h2>신청 접수 목록</h2><div class="scroll"><table><thead><tr><th>접수일</th><th>고인 / 종류</th><th>신청자</th><th>상태</th><th>사진</th><th>관리</th></tr></thead><tbody id="orders"></tbody></table></div></section><section id="detail" class="panel" hidden><h2>신청 상세</h2><div id="info"></div><h3>사진</h3><p class="muted">사진 링크는 10분 동안만 유효합니다. 개인정보 보호를 위해 공유하지 마세요.</p><div id="photos" class="photos"></div><h3>제작 관리</h3><div class="flex"><label>상태 <select id="status"><option value="submitted">접수</option><option value="payment_verified">입금 확인</option><option value="producing">제작중</option><option value="completed">제작완료</option><option value="cancelled">취소</option></select></label><label>영상 URL <input id="video" type="url" placeholder="https://..."></label><button id="save">변경 저장</button><button id="deleteOrder" type="button" class="secondary" hidden>완료 건 삭제</button></div><p class="muted">제작중/제작완료는 입금 확인 이후에만 가능합니다. 영상 공개 및 장례 종료 설정은 이 페이지에서 변경하지 않습니다.</p></section></div></main><script type="module">
 import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
 const BASE='https://pdueejkiwlfhacsvyaux.supabase.co';
 // 공개 가능한 publishable/anon key만 입력하세요. service_role 또는 secret key는 절대 입력하지 마세요.
@@ -17,4 +17,47 @@ $('refresh').onclick=()=>load();
 async function load(){message('접수 목록을 불러오는 중입니다.');try{const data=await call('admin-orders');records=data.orders||[];const body=$('orders');body.replaceChildren();for(const o of records){const tr=document.createElement('tr');for(const value of [new Date(o.created_at).toLocaleString('ko-KR'),text(o.deceased)+' / '+text(o.kind),text(o.customer)+' / '+text(o.phone),o.status,o.photo_count+'장'+(o.upload_finalized?' (완료)':' (미완료)')])tr.append(node('td',value));const td=document.createElement('td'),btn=node('button','상세 보기');btn.className='secondary';btn.onclick=()=>detail(o);td.append(btn);tr.append(td);body.append(tr)}message('접수 '+records.length+'건을 불러왔습니다.')}catch(e){message(e.message,true)}}
 async function detail(o){selected=o;$('detail').hidden=false;$('info').replaceChildren();for(const [k,v] of [['접수번호',o.id],['접수일',new Date(o.created_at).toLocaleString('ko-KR')],['고인',o.deceased],['신청자',o.customer],['연락처',o.phone],['신청 종류',o.kind],['신청 내용',o.message],['금액',o.price],['업로드 완료',o.upload_finalized?'예':'아니요']]){const p=document.createElement('p');p.append(node('strong',k+': '),node('span',v));$('info').append(p)}$('status').value=o.status;$('video').value=o.video_url||'';const holder=$('photos');holder.replaceChildren(node('p','사진을 확인하는 중입니다.'));try{const d=await call('admin-photos',{id:o.id});holder.replaceChildren();if(!d.urls?.length)holder.append(node('p','등록된 사진이 없습니다.'));for(const p of d.urls||[]){const box=document.createElement('div');box.className='photo';const img=document.createElement('img');img.className='preview';img.alt='사진 '+p.index;img.referrerPolicy='no-referrer';img.src=p.url;const a=document.createElement('a');a.href=p.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='사진 '+p.index+' 열기 / 저장';box.append(img,a);holder.append(box)}}catch(e){holder.replaceChildren(node('p','사진 조회 실패: '+e.message))}$('detail').scrollIntoView({behavior:'smooth'})}
 $('save').onclick=async()=>{if(!selected)return;const status=$('status').value,video_url=$('video').value.trim();if(!confirm('이 신청의 제작 상태를 변경하시겠습니까?'))return;$('save').disabled=true;try{await call('admin-update',{id:selected.id,status,video_url});message('변경 사항이 저장되었습니다.');await load();const latest=records.find(o=>o.id===selected.id);if(latest){selected=latest;$('status').value=latest.status;$('video').value=latest.video_url||''}}catch(e){message(e.message,true)}finally{$('save').disabled=false}};
+$('deleteOrder').onclick=async()=>{
+  if(!selected)return;
+
+  if(selected.status!=='completed'){
+    alert('제작완료된 신청만 삭제할 수 있습니다.');
+    return;
+  }
+
+  if(selected.released){
+    alert('공개 중인 영상은 공개 해제 후 삭제할 수 있습니다.');
+    return;
+  }
+
+  if(!confirm('정말 삭제하시겠습니까?\n신청 정보와 업로드 사진이 영구 삭제됩니다.\n삭제 후 복구할 수 없습니다.'))return;
+
+  const btn=$('deleteOrder');
+  btn.disabled=true;
+
+  try{
+    await call('admin-delete',{id:selected.id});
+    selected=null;
+    $('detail').hidden=true;
+    $('photos').replaceChildren();
+    await load();
+    message('완료된 신청과 사진이 삭제되었습니다.');
+  }catch(e){
+    message('삭제 실패: '+e.message,true);
+  }finally{
+    btn.disabled=false;
+  }
+};
+
+const showDeleteButton=()=>{
+  const btn=$('deleteOrder');
+  btn.hidden=!selected||selected.status!=='completed'||selected.released===true;
+};
+
+const originalDetail=detail;
+detail=async function(o){
+  await originalDetail(o);
+  showDeleteButton();
+};
+
 </script></body></html>
