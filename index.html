@@ -1187,4 +1187,15 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')collapse();});
  window.addEventListener('resize',paint);
  requestAnimationFrame(step);
 })();
-</script></body></html>
+</script><script id="sambit-desktop-call-button-fix">
+/* Keep mobile tap-to-call; show the phone number on computers without a phone dialer. */
+document.addEventListener('click', function(event) {
+  const link = event.target.closest('a[href^="tel:"]');
+  if (!link) return;
+  const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (mobile) return;
+  event.preventDefault();
+  alert('삼빛라이프케어 전화상담\n010-5734-9121\n\n휴대폰으로 이 번호에 전화해 주세요.');
+});
+</script>
+</body></html>
